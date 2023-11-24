@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Placements</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Student Placements</h2>
+
+    <!-- Form to add a new placement -->
+    <form id="placementForm">
+        <div class="form-group">
+            <label for="studentName">Student Name:</label>
+            <input type="text" class="form-control" id="studentName" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" required>
+        </div>
+        <div class="form-group">
+            <label for="companyName">Company Name:</label>
+            <input type="text" class="form-control" id="companyName" required>
+        </div>
+        <div class="form-group">
+            <label for="jobOffer">Job Offer:</label>
+            <select class="form-control" id="jobOffer" required>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="addPlacement()">Add Placement</button>
+    </form>
+
+    <!-- Table to display existing placements -->
+    <h3>Placements</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Email</th>
+                <th>Company Name</th>
+                <th>Job Offer</th>
+            </tr>
+        </thead>
+        <tbody id="placementTableBody">
+            <!-- Placements will be dynamically added here -->
+        </tbody>
+    </table>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<!-- Custom JavaScript -->
+<script>
+    // Function to add a new placement
+    function addPlacement() {
+        // Get form values
+        var studentName = document.getElementById('studentName').value;
+        var email = document.getElementById('email').value;
+        var companyName = document.getElementById('companyName').value;
+        var jobOffer = document.getElementById('jobOffer').value;
+
+        // Create a new row in the table
+        var tableBody = document.getElementById('placementTableBody');
+        var newRow = tableBody.insertRow(tableBody.rows.length);
+
+        // Insert cells with the form values
+        var cell1 = newRow.insertCell(0);
+        var cell2 = newRow.insertCell(1);
+        var cell3 = newRow.insertCell(2);
+        var cell4 = newRow.insertCell(3);
+
+        cell1.innerHTML = studentName;
+        cell2.innerHTML = email;
+        cell3.innerHTML = companyName;
+        cell4.innerHTML = jobOffer;
+
+        // Clear the form
+        document.getElementById('placementForm').reset();
+
+        // Display notification
+        alert('Placement added successfully');
+
+        // Send email alert (replace with your server-side email implementation)
+        sendEmailAlert(studentName, email, companyName, jobOffer);
+    }
+
+    // Placeholder for sending email alert
+    function sendEmailAlert(studentName, email, companyName, jobOffer) {
+        // Replace the following line with your actual server-side email sending code
+        // This is just an example to illustrate the idea
+        fetch('your-server-endpoint-for-email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                studentName: studentName,
+                email: email,
+                companyName: companyName,
+                jobOffer: jobOffer,
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Email sent successfully:', data);
+        })
+        .catch(error => {
+            console.error('Error sending email:', error);
+        });
+    }
+</script>
+
+</body>
+</html>

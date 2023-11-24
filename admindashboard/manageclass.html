@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Class Management</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      padding: 20px;
+    }
+
+    #classTable {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h2>Class Management</h2>
+
+    <!-- Add Class Form -->
+    <form id="addClassForm">
+      <div class="mb-3">
+        <label for="className" class="form-label">Class Name:</label>
+        <input type="text" class="form-control" id="className" required>
+      </div>
+      <div class="mb-3">
+        <label for="day" class="form-label">Day:</label>
+        <input type="text" class="form-control" id="day" required>
+      </div>
+      <div class="mb-3">
+        <label for="time" class="form-label">Time:</label>
+        <input type="text" class="form-control" id="time" required>
+      </div>
+      <button type="button" class="btn btn-primary" onclick="saveClass()">Save Class</button>
+    </form>
+
+    <!-- Saved Classes -->
+    <div id="savedClasses">
+      <h3>Saved Classes</h3>
+      <table id="classTable" class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Class Name</th>
+            <th>Day</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Table content will be dynamically populated using JavaScript -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+  <!-- Custom JavaScript -->
+  <script>
+    // Array to store saved classes
+    const savedClasses = [];
+
+    // Function to save a new class
+    function saveClass() {
+      // Get form values
+      const className = document.getElementById('className').value;
+      const day = document.getElementById('day').value;
+      const time = document.getElementById('time').value;
+
+      // Check if inputs are not empty
+      if (!className || !day || !time) {
+        alert('Please fill out all fields.');
+        return;
+      }
+
+      // Create a new class object
+      const newClass = {
+        className: className,
+        day: day,
+        time: time
+      };
+
+      // Add the new class to the array
+      savedClasses.push(newClass);
+
+      // Update the table with saved classes
+      updateClassTable();
+
+      // Reset the form
+      document.getElementById('addClassForm').reset();
+    }
+
+    // Function to update the table with saved classes
+    function updateClassTable() {
+      const classTableBody = document.querySelector('#classTable tbody');
+
+      // Clear existing table rows
+      classTableBody.innerHTML = '';
+
+      // Add rows for each saved class
+      savedClasses.forEach((classInfo) => {
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `<td>${classInfo.className}</td><td>${classInfo.day}</td><td>${classInfo.time}</td>`;
+        classTableBody.appendChild(newRow);
+      });
+    }
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Analyse Placement</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: seagreen; /* Updated color to seagreen */
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+
+        section {
+            margin: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: seagreen; /* Updated color to seagreen */
+            color: #fff;
+        }
+
+        button {
+            padding: 10px;
+            background-color: seagreen; /* Updated color to seagreen */
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #006400; /* Darker shade of seagreen for hover effect */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Admin - Analyse Placement</h1>
+    </header>
+
+    <section>
+        <h2>Placement Data</h2>
+        <button onclick="loadPlacementData()">Load Placement Data</button>
+        <table id="placementTable">
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Company</th>
+                    <th>Salary</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be populated here -->
+            </tbody>
+        </table>
+    </section>
+
+    <script>
+        function loadPlacementData() {
+            // You can replace this with actual data retrieval logic
+            const placementData = [
+                { studentName: 'John Doe', company: 'XYZ Corp', salary: '$60,000' },
+                { studentName: 'Jane Smith', company: 'ABC Ltd', salary: '$55,000' },
+                // Add 10 more data
+                { studentName: 'Alice Johnson', company: '123 Inc', salary: '$70,000' },
+                { studentName: 'Bob Wilson', company: '456 Ltd', salary: '$65,000' },
+                { studentName: 'Charlie Brown', company: '789 Corp', salary: '$75,000' },
+                { studentName: 'David Miller', company: 'XYZ Ltd', salary: '$80,000' },
+                { studentName: 'Eva Davis', company: 'ABC Corp', salary: '$72,000' },
+                { studentName: 'Frank White', company: '123 Ltd', salary: '$68,000' },
+                { studentName: 'Grace Turner', company: '456 Corp', salary: '$78,000' },
+                { studentName: 'Henry Young', company: '789 Ltd', salary: '$85,000' },
+                { studentName: 'Ivy Taylor', company: 'XYZ Inc', salary: '$90,000' },
+            ];
+
+            const tableBody = document.querySelector('#placementTable tbody');
+
+            // Clear existing rows
+            tableBody.innerHTML = '';
+
+            // Populate table with new data
+            placementData.forEach(data => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${data.studentName}</td>
+                    <td>${data.company}</td>
+                    <td>${data.salary}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+    </script>
+
+</body>
+</html>

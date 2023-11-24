@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Drive Form</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="mb-4">Add Drive - Computer Science Course</h2>
+
+    <form id="addDriveForm">
+        <div class="mb-3">
+            <label for="courseName" class="form-label">Course Name</label>
+            <input type="text" class="form-control" id="courseName" required>
+        </div>
+        <div class="mb-3">
+            <label for="courseCode" class="form-label">Course Code</label>
+            <input type="text" class="form-control" id="courseCode" required>
+        </div>
+        <div class="mb-3">
+            <label for="instructor" class="form-label">Instructor</label>
+            <input type="text" class="form-control" id="instructor" required>
+        </div>
+
+        <button type="button" class="btn btn-primary" onclick="addDrive()">Add</button>
+
+        <div class="alert alert-success mt-3" id="successMessage" style="display: none;">
+            Course added successfully!
+        </div>
+    </form>
+</div>
+
+<!-- Bootstrap JS and Popper.js (for Bootstrap's JavaScript plugins) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    function addDrive() {
+        // You can add your logic here to handle the form data (not implemented in this example)
+        
+        // Display the success message
+        document.getElementById('successMessage').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Overview</title>
+    <!-- Bootstrap CSS link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: seagreen;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        #overview-container {
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        .metric {
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #dae07b;
+            box-shadow: 0 0 10px rgba(10, 175, 37, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Academic Overview</h1>
+    </header>
+
+    <div id="overview-container" class="container">
+        <!-- Metric Cards using Bootstrap Grid System -->
+        <div class="row">
+            <div class="col-md-4">
+                <div class="metric bg-light p-3">
+                    <h2>Average Grade</h2>
+                    <p id="average-grade-value" class="mb-0"></p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="metric bg-light p-3">
+                    <h2>Courses Completed</h2>
+                    <p id="courses-completed-value" class="mb-0"></p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="metric bg-light p-3">
+                    <h2>Upcoming Exams</h2>
+                    <ul id="upcoming-exams-list" class="list-unstyled mb-0"></ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="metric bg-light p-3">
+                    <h2>Attendance Rate</h2>
+                    <p id="attendance-rate-value" class="mb-0"></p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="metric bg-light p-3">
+                    <h2>Assignments Pending</h2>
+                    <p id="assignments-pending-value" class="mb-0"></p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="metric bg-light p-3">
+                    <h2>Graduation Progress</h2>
+                    <p id="graduation-progress-value" class="mb-0"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Sample data (replace this with your actual data)
+        const averageGrade = 85;
+        const coursesCompleted = 10;
+        const upcomingExams = ['Web development', 'Artificial intelligent'];
+        const attendanceRate = '90%';
+        const assignmentsPending = 5;
+        const graduationProgress = '60%';
+
+        // Display data in the HTML document
+        document.getElementById('average-grade-value').innerText = `Average Grade: ${averageGrade}%`;
+        document.getElementById('courses-completed-value').innerText = `Courses Completed: ${coursesCompleted}`;
+        
+        // Display upcoming exams as a list
+        const upcomingExamsList = document.getElementById('upcoming-exams-list');
+        upcomingExams.forEach(exam => {
+            const listItem = document.createElement('li');
+            listItem.innerText = exam;
+            upcomingExamsList.appendChild(listItem);
+        });
+
+        document.getElementById('attendance-rate-value').innerText = `Attendance Rate: ${attendanceRate}`;
+        document.getElementById('assignments-pending-value').innerText = `Assignments Pending: ${assignmentsPending}`;
+        document.getElementById('graduation-progress-value').innerText = `Graduation Progress: ${graduationProgress}`;
+    </script>
+</body>
+</html>

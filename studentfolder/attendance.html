@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attendance Tracker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .attendance-container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .class-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .class-item {
+      margin-bottom: 10px;
+    }
+
+    .submit-btn {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="attendance-container">
+  <h2>Class Attendance Tracker</h2>
+  <ul class="class-list" id="class-list">
+    <!-- Class list will be dynamically generated here -->
+  </ul>
+  <button class="submit-btn" onclick="submitAttendance()">Submit Attendance</button>
+</div>
+
+<script>
+  // Updated class list
+  const classes = [
+    "Computer Science 101",
+    "Data Structures",
+    "Algorithm Design",
+    "Database Management",
+    "Web Development",
+    "Artificial Intelligence",
+    "Operating Systems"
+  ];
+
+  // Function to dynamically generate the class list
+  function generateClassList() {
+    const classListContainer = document.getElementById("class-list");
+
+    classes.forEach(className => {
+      const listItem = document.createElement("li");
+      listItem.className = "class-item";
+      
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.name = className;
+      checkbox.id = className;
+
+      const label = document.createElement("label");
+      label.htmlFor = className;
+      label.innerText = className;
+
+      listItem.appendChild(checkbox);
+      listItem.appendChild(label);
+
+      classListContainer.appendChild(listItem);
+    });
+  }
+
+  // Function to submit attendance
+  function submitAttendance() {
+    const selectedClasses = [];
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+
+    checkboxes.forEach(checkbox => {
+      selectedClasses.push(checkbox.name);
+    });
+
+    alert(`Attendance submitted for: ${selectedClasses.join(", ")}`);
+    // You can send this data to a server for storage or further processing
+  }
+
+  // Generate the class list on page load
+  window.onload = generateClassList;
+</script>
+
+</body>
+</html>

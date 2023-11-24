@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student Management Dashboard</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles -->
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .container {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-top: 50px;
+    }
+
+    h1 {
+      color: seagreen;
+    }
+
+    .nav-tabs {
+      border-bottom: 2px solid #007bff;
+    }
+
+    .nav-link {
+      color: #495057;
+    }
+
+    .nav-link.active {
+      color: #007bff;
+      border-bottom: 2px solid #007bff;
+    }
+
+    .tab-content {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1 class="mb-4">Student Management</h1>
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" id="myTabs">
+      <li class="nav-item">
+        <a class="nav-link active" id="info-tab" data-bs-toggle="tab" href="#info">Student Information</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="attendance-tab" data-bs-toggle="tab" href="#attendance">Attendance</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="performance-tab" data-bs-toggle="tab" href="#performance">Performance</a>
+      </li>
+    </ul>
+
+    <!-- Tab content -->
+    <div class="tab-content">
+      <!-- Student Information Tab -->
+      <div class="tab-pane fade show active" id="info">
+        <h3>Student Information</h3>
+        <p>Welcome to the Student Information tab. Here you can view and manage student details.</p>
+
+        <!-- Add Student Form -->
+        <form id="addStudentForm">
+          <div class="mb-3">
+            <label for="studentName" class="form-label">Student Name:</label>
+            <input type="text" class="form-control" id="studentName" required>
+          </div>
+          <div class="mb-3">
+            <label for="studentID" class="form-label">Student ID:</label>
+            <input type="text" class="form-control" id="studentID" required>
+          </div>
+
+          <!-- Attendance Section -->
+          <div class="mb-3">
+            <h4>Attendance</h4>
+            <label for="attendance">Number of Classes Attended:</label>
+            <input type="number" class="form-control" id="attendance" required>
+          </div>
+
+          <!-- Performance Section -->
+          <div class="mb-3">
+            <h4>Performance</h4>
+            <label for="grades">Grades:</label>
+            <input type="text" class="form-control" id="grades" required>
+          </div>
+
+          <button type="button" class="btn btn-primary" onclick="saveStudent()">Save Student</button>
+        </form>
+
+        <!-- Display Saved Students -->
+        <div id="savedStudents">
+          <h4>Saved Students</h4>
+          <ul id="studentList" class="list-group">
+            <!-- Student items will be dynamically populated using JavaScript -->
+          </ul>
+        </div>
+
+        <!-- Alert to display student details -->
+        <div id="studentDetailsAlert" class="alert alert-success mt-4" style="display: none;">
+          <h5 class="alert-heading">Student Details</h5>
+          <p id="studentDetails"></p>
+        </div>
+      </div>
+
+      <!-- Attendance Tab -->
+      <div class="tab-pane fade" id="attendance">
+        <h3>Attendance</h3>
+        <p>Track and manage student attendance in this section. Keep an eye on their punctuality!</p>
+        <!-- Add your HTML and JavaScript code for managing attendance here -->
+      </div>
+
+      <!-- Performance Tab -->
+      <div class="tab-pane fade" id="performance">
+        <h3>Performance</h3>
+        <p>Explore the academic performance of your students. Identify areas of improvement and success stories.</p>
+        <!-- Add your HTML and JavaScript code for managing performance here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5 JS and Popper.js (required for Bootstrap) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Your custom JavaScript code -->
+  <script>
+    // Array to store saved students
+    const savedStudents = [];
+
+    // Function to save a new student
+    function saveStudent() {
+      // Get form values
+      const studentName = document.getElementById('studentName').value;
+      const studentID = document.getElementById('studentID').value;
+      const attendance = document.getElementById('attendance').value;
+      const grades = document.getElementById('grades').value;
+
+      // Check if inputs are not empty
+      if (!studentName || !studentID || !attendance || !grades) {
+        alert('Please fill out all fields.');
+        return;
+      }
+
+      // Create a new student object
+      const newStudent = {
+        studentName: studentName,
+        studentID: studentID,
+        attendance: attendance,
+        grades: grades
+      };
+
+      // Add the new student to the array
+      savedStudents.push(newStudent);
+
+      // Update the list with saved students
+      updateStudentList();
+
+      // Display student details in an alert
+      displayStudentDetails(newStudent);
+
+      // Reset the form
+      document.getElementById('addStudentForm').reset();
+    }
+
+    // Function to update the list with saved students
+    function updateStudentList() {
+      const studentList = document.getElementById('studentList');
+
+      // Clear existing list items
+      studentList.innerHTML = '';
+
+      // Add list items for each saved student
+      savedStudents.forEach((student) => {
+        const listItem = document.createElement('li');
+        listItem.className = 'list-group-item';
+        listItem.textContent = `${student.studentName} (ID: ${student.studentID})`;
+        studentList.appendChild(listItem);
+      });
+    }
+
+    // Function to display student details in an alert
+    function displayStudentDetails(student) {
+      const studentDetailsAlert = document.getElementById('studentDetailsAlert');
+      const studentDetails = document.getElementById('studentDetails');
+
+      // Display student details in the alert
+      studentDetails.textContent = `Name: ${student.studentName}, ID: ${student.studentID}, Attendance: ${student.attendance}, Grades: ${student.grades}`;
+      studentDetailsAlert.style.display = 'block';
+
+      // Hide the alert after 5 seconds (5000 milliseconds)
+      setTimeout(() => {
+        studentDetailsAlert.style.display = 'none';
+      }, 5000);
+    }
+  </script>
+</body>
+
+</html>
